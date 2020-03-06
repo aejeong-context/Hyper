@@ -29,7 +29,7 @@
 			class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource" />
 			<property name="configLocation"
-				value="/WEB-INF/sqls/Configuration.xml"></property>
+				value="/WEB-INF/spring/sqls/Configuration.xml"></property>
 		</bean>
 
 	<bean id="sqlSessionTemplate"
