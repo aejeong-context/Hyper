@@ -17,25 +17,20 @@
 	</bean>
 
 	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName"
-			value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="url"
-			value="jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="${username}"></property>
-		<property name="password" value="${password}"></property>
-		<property name="defaultAutoCommit" value="true"></property>
-	</bean>
+			class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="${driver}" />
+			<property name="url" value="${url}" />
+			<property name="username" value="${user}" />
+			<property name="password" value="${pw}" />
+			<property name="defaultAutoCommit" value="true" />
+		</bean>
 
 	<bean id="sqlSessionFactoryBean"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<property name="configLocation"
-			value="/WEB-INF/spring/sqls/mybatisConfigure.xml"></property>
-		<property name="mapperLocations"
-			value="classpath:com.min.app.mybatis.*.xml"></property>
-
-	</bean>
+			class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="configLocation"
+				value="/WEB-INF/sqls/Configuration.xml"></property>
+		</bean>
 
 	<bean id="sqlSessionTemplate"
 		class="org.mybatis.spring.SqlSessionTemplate">
