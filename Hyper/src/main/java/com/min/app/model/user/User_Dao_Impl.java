@@ -21,7 +21,7 @@ public class User_Dao_Impl implements User_IDao{
 
 	@Override
 	public boolean signUpSetting(User_Dto dto) {
-		return session.insert(NS+"signUpSetting")>0?true:false;
+		return session.insert(NS+"signUpSetting",dto)>0?true:false;
 	}
 
 	@Override
