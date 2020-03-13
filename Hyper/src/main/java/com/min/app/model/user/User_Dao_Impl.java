@@ -1,5 +1,7 @@
 package com.min.app.model.user;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,8 +27,8 @@ public class User_Dao_Impl implements User_IDao{
 	}
 
 	@Override
-	public int signIn(User_Dto dto) {
-		return session.selectOne(NS+"signIn", dto);
+	public User_Dto signIn(String user_email) {
+		return session.selectOne(NS+"signIn", user_email);
 	}
 
 	@Override

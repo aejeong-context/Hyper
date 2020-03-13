@@ -15,11 +15,11 @@
 	</insert>
 
 	<!-- 로그인 -->
-	<select id="signIn" parameterType="uDTO" resultType="java.lang.Integer">
-		SELECT USER_SEQ FROM
+	<select id="signIn" parameterType="java.lang.String" resultType="uDTO">
+		SELECT USER_EMAIL,USER_PW FROM
 		HYPER_USER
-		WHERE USER_EMAIL=#{user_email} AND
-		USER_PW=#{user_pw}
+		WHERE USER_EMAIL=#{user_email} 
+		<!--AND USER_PW=#{user_pw}-->
 	</select>
 
 	<!-- 회원탈퇴 -->

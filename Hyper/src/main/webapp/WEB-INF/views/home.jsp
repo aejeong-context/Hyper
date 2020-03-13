@@ -1,29 +1,45 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
-	<title>Home</title>
+<title>Home</title>
 </head>
-<body>
-<h1>
-	Hello world!  
-</h1>
 
-<form class="sign" action="./register" method="post">
-<input type="email" id="email" name="user_email" placeholder="이메일" required="required">
-<input type="password" id="pw" name="user_pw" placeholder="비밀번호" required="required">
-<input type="text" id="nck" name="setting_nck" placeholder="닉네임" required="required">
-<button type="submit">완료</button>
-</form>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-<script type="text/javascript">
+<script>
+
+	
+</script>
+<body>
+	<h1>Hello world!</h1>
+
+	<form class="sign" action="./register" method="post">
+		<input type="email" id="email" name="user_email" placeholder="이메일"
+			required="required"> <input type="password" id="pw"
+			name="user_pw" placeholder="비밀번호" required="required"> <input
+			type="text" id="nck" name="setting_nck" placeholder="닉네임"
+			required="required">
+		<button type="submit">완료</button>
+	</form>
+	<br>
+
+	<form class="signIn" action="./signIn" method="post">
+		<input type="email" id="UserEmail" name="user_email" placeholder="이메일"
+			required="required"> <input type="password" id="UserPassword"
+			name="user_pw" placeholder="비밀번호" required="required">
+		<button type="submit">완료</button>
+	</form>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
 $(document).ready(function(){
 	$("#nck").keyup(function(){
 		var inputLength = $(this).val().length;

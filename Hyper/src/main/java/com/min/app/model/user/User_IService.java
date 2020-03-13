@@ -1,5 +1,7 @@
 package com.min.app.model.user;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.min.app.dto.Setting_Dto;
@@ -12,7 +14,7 @@ public interface User_IService {
 	public boolean signUp(User_Dto dto);
 
 //	로그인                    
-	public int signIn(User_Dto dto);
+	public User_Dto signIn(String user_email);
 
 //	회원탈퇴
 	public boolean signDown(int user_seq);

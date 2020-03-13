@@ -6,15 +6,19 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.min.app.dto.User_Dto;
 import com.min.app.model.user.User_IService;
@@ -76,5 +80,21 @@ public class HomeController {
 		logger.info("register 결과",isc);
 		return "/";
 	}
-
+	//로그인
+	@RequestMapping(value="/signIn",method = RequestMethod.POST)
+	public String SignIn(User_Dto dto,HttpSession session) {
+		System.out.println(dto);
+		User_Dto Ldto = Uservice.signIn(dto.getUser_email());
+		System.out.println(Ldto);
+		if(Ldto != null) {
+			boolean passMatch = passEncoder.matches(dto.getUser_pw(),Ldto.getUser_pw());
+			if(passMatch == true) {
+				session.setAttribute("Ldto", Ldto);
+				return "main";
+			}else {
+				return "/";
+			}
+		}
+		return "/";
+	}
 }

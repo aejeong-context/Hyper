@@ -1,5 +1,7 @@
 package com.min.app.model.user;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +32,8 @@ public class User_Service_Impl implements User_IService{
 	}
 
 	@Override
-	public int signIn(User_Dto dto) {
-		return dao.signIn(dto);
+	public User_Dto signIn(String user_email) {
+		return dao.signIn(user_email);
 	}
 
 	@Override
