@@ -17,6 +17,7 @@
 	<h1>Hello world!</h1>
 
 	<form class="sign" action="./register" method="post">
+	<input type="hidden" name="user_seq" value="${Ldto.user_seq}">
 		<input type="email" id="email" name="user_email" placeholder="이메일"
 			required="required"> <input type="password" id="pw"
 			name="user_pw" placeholder="비밀번호" required="required"> <input

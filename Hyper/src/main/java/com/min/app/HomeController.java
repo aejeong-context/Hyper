@@ -78,7 +78,7 @@ public class HomeController {
 		dto.setUser_pw(pass);
 		boolean isc = Uservice.signUp(dto);
 		logger.info("register 결과",isc);
-		return "/";
+		return "home";
 	}
 	//로그인
 	@RequestMapping(value="/signIn",method = RequestMethod.POST)
@@ -92,10 +92,11 @@ public class HomeController {
 				session.setAttribute("Ldto", Ldto);
 				return "main";
 			}else {
-				return "/";
+				System.out.println("야래야래 비밀번호 틀렸다고네!");
+				return "home";
 			}
 		}
-		return "/";
+		return "home";
 	}
 	
 	//로그아웃
@@ -111,6 +112,29 @@ public class HomeController {
 		return "/";
 		
 	}
+	//비밀번호 변경
+	@RequestMapping(value = "/pwChange",method = RequestMethod.POST)
+	public String resetPw(User_Dto dto) {
+		System.out.println(dto);
+		String inputPass = dto.getUser_pw();
+		String pass = passEncoder.encode(inputPass);
+		dto.setUser_pw(pass);
+		boolean isc =Uservice.resetPw(dto);
+			if(isc) {
+				logger.info("비밀번호 변경된다");
+			return "home";
+		}
+		
+		return "main";
+	}
+	//상태메세지 변경
+	@RequestMapping(value="./updateSm",method = RequestMethod.POST)
+	public String updateSm(User_Dto dto,HttpSession session) {
+		return "main";
+	}
+	//닉네임 변경
+	//회원탈퇴
+	
 	
 	
 }

@@ -16,7 +16,7 @@
 
 	<!-- 로그인 -->
 	<select id="signIn" parameterType="java.lang.String" resultType="uDTO">
-		SELECT USER_EMAIL,USER_PW FROM
+		SELECT USER_EMAIL,USER_PW,USER_SEQ FROM
 		HYPER_USER
 		WHERE USER_EMAIL=#{user_email} 
 		<!--AND USER_PW=#{user_pw}-->
