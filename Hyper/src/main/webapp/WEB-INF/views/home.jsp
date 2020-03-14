@@ -32,6 +32,8 @@
 			name="user_pw" placeholder="비밀번호" required="required">
 		<button type="submit">완료</button>
 	</form>
+	
+	
 
 
 

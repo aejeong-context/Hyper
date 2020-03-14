@@ -8,6 +8,9 @@
 </head>
 <body>
 로그인성공
+<p>${Ldto.user_email} 님 환영합니다.</p>
+<a href="./logout">로그아웃</a>
+
 
 </body>
 </html>

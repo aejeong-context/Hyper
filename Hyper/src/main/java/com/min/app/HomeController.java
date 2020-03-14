@@ -97,4 +97,20 @@ public class HomeController {
 		}
 		return "/";
 	}
+	
+	//로그아웃
+	@RequestMapping(value = "/logout",method = RequestMethod.GET)
+	public  String logout(HttpSession session) {
+
+		User_Dto Ldto  = (User_Dto)session.getAttribute("Ldto");
+		if(Ldto!=null) {
+			logger.info("로그아웃될것임");
+			session.removeAttribute("Ldto");
+			return "main";
+		}
+		return "/";
+		
+	}
+	
+	
 }
