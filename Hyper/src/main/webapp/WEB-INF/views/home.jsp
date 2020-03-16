@@ -9,10 +9,6 @@
 <title>Home</title>
 </head>
 
-<script>
-
-	
-</script>
 <body>
 	<h1>Hello world!</h1>
 
