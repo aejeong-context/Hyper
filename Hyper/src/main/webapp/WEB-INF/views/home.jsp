@@ -30,13 +30,7 @@
 		<button type="submit">완료</button>
 	</form>
 	
-	
 
-
-
-	<script src="https://code.jquery.com/jquery-3.4.1.js"
-		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-		crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
 $(document).ready(function(){
@@ -75,7 +69,7 @@ $(document).ready(function(){
 		//한글, 영문, 숫자만 입력 가능
 		var emailReg = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 		
-		nick=$(this).val();
+		email=$(this).val();
 		if(inputLength < 4 || inputLength > 30){
 			$("#email").before("<span>불가능</span>");
 		}else if(email.indexOf(" ") != -1){
@@ -105,9 +99,9 @@ $(document).ready(function(){
 		pw=$(this).val();
 		//5글자이상 15글자 이내
 		if(inputLength < 4 || inputLength > 16){
-			$("#email").before("<span>불가능</span>");
+			$("#pw").before("<span>불가능</span>");
 		}else if(email.indexOf(" ") != -1){
-			$("#email").before("<span>불가능</span>");
+			$("#pw").before("<span>불가능</span>");
 	
 		}
 		})

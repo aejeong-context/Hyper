@@ -1,33 +1,27 @@
-package com.min.app;
+package com.min.app.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.min.app.dto.User_Dto;
 import com.min.app.model.user.User_IService;
 
 @Controller
-public class HomeController {
+public class BasicController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(BasicController.class);
 
 	@Autowired
 	BCryptPasswordEncoder passEncoder;
@@ -36,16 +30,18 @@ public class HomeController {
 	User_IService Uservice;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
-		return "redirect:/index";
+	public String init(HttpSession session) {
+		return "index";
 	}
+
+	//테스트
 	@RequestMapping(value = "/index",method = RequestMethod.GET)
 	public String index(HttpSession session) {
 		User_Dto Ldto  = (User_Dto)session.getAttribute("Ldto");
 		System.out.println(Ldto);
 		return "home";
 	}
-	
+
 
 	//이메일 중복 체크
 	@RequestMapping(value = "/checkemail",method = RequestMethod.POST)
@@ -77,39 +73,36 @@ public class HomeController {
 		dto.setUser_pw(pass);
 		boolean isc = Uservice.signUp(dto);
 		logger.info("register 결과",isc);
-		return "/";
+		return "redirect:/";
 	}
 	//로그인
 	@RequestMapping(value="/signIn",method = RequestMethod.POST)
-	public String SignIn(User_Dto dto,HttpSession session) {
-		System.out.println("받은 dto"+dto);
-		User_Dto Ldto = Uservice.signIn(dto.getUser_email());
+	@ResponseBody
+	public Map<String, String> SignIn(String email, String password,HttpSession session) {
+		System.out.println("받은 email"+email+"비밀번호"+password);
+		User_Dto Ldto = Uservice.signIn(email);
+		Map<String, String> map = new HashMap<String, String>();
+
 		if(Ldto != null) {
-			boolean passMatch = passEncoder.matches(dto.getUser_pw(),Ldto.getUser_pw());
-			if(passMatch == true) {
+			boolean passMatch = passEncoder.matches(password,Ldto.getUser_pw());
+			if (passMatch) {
 				session.setAttribute("Ldto", Ldto);
-				System.out.println("로그인성공이다요");
-				return "user/main";
-			}else {
-				System.out.println("야래야래 비밀번호 틀렸다고네!");
+				map.put("checkl", "true");
+				return map;
 			}
 		}
-		return "redirect:/";
+		map.put("checkl", "false");
+		return map;
 	}
 
 	//로그아웃
 
 	@RequestMapping(value = "/logout",method = RequestMethod.GET)
-	public  String logout(HttpSession session) {
-		User_Dto Ldto = (User_Dto)session.getAttribute("Ldto");
-		System.out.println(session.getAttribute("세션 무효화 전"+"Ldto"));
-		if(Ldto!=null) {
-			//session.removeAttribute("Ldto");
-			session.invalidate();
-			return "redirect:/";
-		}
-		return "user/main";
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
+
 	//비밀번호 변경
 	@RequestMapping(value = "/pwChange",method = RequestMethod.POST)
 	public String resetPw(User_Dto dto,HttpSession session) {

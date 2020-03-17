@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.min.app.model.user">
-
+	
 	<!-- 회원가입 -->
 	<insert id="signUpUser" parameterType="uDTO">
 		INSERT INTO HYPER_USER(USER_EMAIL,USER_PW)
@@ -16,12 +16,13 @@
 
 	<!-- 로그인 -->
 	<select id="signIn" parameterType="java.lang.String" resultType="uDTO">
-		SELECT USER_EMAIL,USER_PW,USER_SEQ FROM
-		HYPER_USER
+		SELECT USER_EMAIL,USER_PW,U.USER_SEQ,SETTING_NCK FROM
+		HYPER_USER U INNER JOIN HYPER_SETTING S
+		USING(USER_SEQ)
 		WHERE USER_EMAIL=#{user_email} 
 		<!--AND USER_PW=#{user_pw}-->
 	</select>
-
+	
 	<!-- 회원탈퇴 -->
 	<delete id="signDown" parameterType="java.lang.Integer">
 		DELETE FROM HYPER_USER WHERE USER_SEQ=#{user_seq}
