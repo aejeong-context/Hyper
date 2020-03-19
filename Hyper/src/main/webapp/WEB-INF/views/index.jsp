@@ -66,6 +66,7 @@ body {
 	%>
 	<jsp:include page="./layout/widgetBoxLogin.jsp" />
 	<jsp:include page="./layout/widgetBoxArea.jsp" />
+	<a href="./fileup">파일업로드 하러가기</a>
 
 	<%
 		}

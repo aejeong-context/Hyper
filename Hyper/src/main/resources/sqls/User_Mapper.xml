@@ -76,5 +76,10 @@
 		UPDATE HYPER_SETTING SET SETTING_THEME=#{setting_theme} WHERE
 		USER_SEQ=#{user_seq}
 	</update>
+	<!-- 이미지 업로드 -->
+	<insert id="imageup" parameterType="sDTO">
+	INSERT INTO HYPER_IMAGE(USER_SEQ,IMAGE_SEQ,ORI_IMAGE_NAME,STO_IMAGE_NAME,IMAGE_SIZE) 
+	VALUES (#{user_seq},#{image_seq},#{ori_image_name},#{sto_image_name},#{image_size});
+	</insert>
 
 </mapper>

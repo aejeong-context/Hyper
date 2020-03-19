@@ -13,10 +13,7 @@
 </script>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 
-로그인성공
 <p>${Ldto.user_email} 님 환영합니다.</p>
-<!-- <form action="./logout" method="get">
-<button type="submit">로그아웃</button></form>  -->
 <a href="./logout">로그아웃</a>
 
 <form action="./pwChange" method="post">

@@ -123,12 +123,18 @@ public class BasicController {
 		return "redirect:/";
 	}
 	//상태메세지 변경
-	@RequestMapping(value="./updateSm",method = RequestMethod.POST)
+	@RequestMapping(value="/updateSm",method = RequestMethod.POST)
 	public String updateSm(User_Dto dto,HttpSession session) {
 		return "main";
 	}
 	//닉네임 변경
 	//회원탈퇴
+	
+	//파일업로드
+	@RequestMapping(value = "/fileup",method = RequestMethod.GET)
+	public String fileup() {
+		return "user/ImageUpload";
+	}
 
 
 
