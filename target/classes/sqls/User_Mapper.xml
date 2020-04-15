@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.min.app.model.user">
+	<!-- 닉네임으로 셋팅정보 가져오기 -->
+	<select id="getSettingInfo" parameterType="java.lang.String" resultType="sDTO">
+		SELECT USER_SEQ,SETTING_NCK,SETTING_MSG,SETTING_THEME FROM HYPER_SETTING WHERE SETTING_NCK=#{setting_nck}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="signUpUser" parameterType="uDTO">
+		INSERT INTO HYPER_USER(USER_EMAIL,USER_PW)
+		VALUES(#{user_email},#{user_pw})
+	</insert>
+
+	<insert id="signUpSetting" parameterType="sDTO">
+		INSERT INTO HYPER_SETTING(USER_SEQ,SETTING_NCK)
+		VALUES((SELECT USER_SEQ FROM HYPER_USER WHERE USER_EMAIL =
+		#{user_email}), #{setting_nck})
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="signIn" parameterType="java.lang.String" resultType="uDTO">
+		SELECT USER_EMAIL,USER_PW,U.USER_SEQ,SETTING_NCK FROM
+		HYPER_USER U INNER JOIN HYPER_SETTING S
+		USING(USER_SEQ)
+		WHERE USER_EMAIL=#{user_email} 
+		<!--AND USER_PW=#{user_pw}-->
+	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="signDown" parameterType="java.lang.Integer">
+		DELETE FROM HYPER_USER WHERE USER_SEQ=#{user_seq}
+	</delete>
+
+	<!-- 이메일 중복검사 -->
+	<select id="emailCheck" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT CASE WHEN USER_EMAIL=
+		NULL THEN '사용가능' ELSE '사용불가 ' END AS '검사결과' FROM HYPER_USER WHERE
+		USER_EMAIL = #{user_email}
+	</select>
+
+	<!-- 닉네임 중복검사 -->
+	<select id="nckCheck" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT CASE WHEN SETTING_NCK=
+		NULL THEN '사용가능' ELSE '사용불가 ' END AS '검사결과' FROM HYPER_SETTING WHERE
+		SETTING_NCK = #{setting_nck}
+	</select>
+
+	<!-- 비밀번호 재설정 -->
+	<update id="resetPw" parameterType="uDTO">
+		UPDATE HYPER_USER SET USER_PW=#{user_pw} WHERE USER_SEQ=#{user_seq}
+	</update>
+
+	<!-- 닉네임 재설정 -->
+	<update id="resetNck" parameterType="uDTO">
+		UPDATE HYPER_SETTING SET SETTING_NCK=#{setting_nck}
+		WHERE
+		USER_SEQ=#{user_seq}
+	</update>
+
+	<!-- 상태메시지 조회 -->
+	<select id="selectSm" parameterType="java.lang.Integer" resultType="java.lang.String">
+		SELECT SETTING_MSG FROM HYPER_SETTING WHERE
+		USER_SEQ=#{user_seq}
+	</select>
+
+	<!-- 상태메시지 수정 -->
+	<update id="updateSm" parameterType="sDTO">
+		UPDATE HYPER_SETTING SET SETTING_MSG=#{setting_msg} WHERE
+		USER_SEQ=#{user_seq}
+	</update>
+
+	<!-- 테마 조회 -->
+	<select id="selectTm" parameterType="java.lang.Integer" resultType="java.lang.String">
+		SELECT SETTING_THEME FROM HYPER_SETTING WHERE USER_SEQ=#{user_seq}
+	</select>
+
+	<!-- 테마 변경 -->
+	<update id="updateTm" parameterType="sDTO">
+		UPDATE HYPER_SETTING SET SETTING_THEME=#{setting_theme} WHERE
+		USER_SEQ=#{user_seq}
+	</update>
+
+</mapper>

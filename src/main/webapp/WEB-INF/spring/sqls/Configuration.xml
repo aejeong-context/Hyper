@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+   	<typeAliases>
+		<typeAlias type="com.min.app.dto.Day_Dto" alias="dDTO" />
+		<typeAlias type="com.min.app.dto.Key_Dto" alias="kDTO" />
+		<typeAlias type="com.min.app.dto.Setting_Dto" alias="sDTO" />
+		<typeAlias type="com.min.app.dto.User_Dto" alias="uDTO" />
+		<typeAlias type="com.min.app.dto.Memo_Dto" alias="mDTO" />
+		<typeAlias type="com.min.app.dto.File_Dto" alias="fDTO" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="/sqls/File_Mapper.xml" />
+		<mapper resource="/sqls/Event_Mapper.xml" />
+		<mapper resource="/sqls/User_Mapper.xml" />
+	</mappers>
+   
+</configuration>
