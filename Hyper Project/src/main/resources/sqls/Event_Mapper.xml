@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.min.app.model.event">
+	<!-- 단축키 생성 -->
+	<insert id="settingKey" parameterType="kDTO">
+		INSERT INTO HYPER_LINK(USER_SEQ,LINK_KEY,LINK_URL,LINK_ICON,LINK_ORDER)
+		VALUES(#{user_seq},#{link_key},#{link_url},#{link_icon},#{link_order})
+	</insert>
+
+	<!-- 단축키 조회 -->
+	<select id="selectKey" parameterType="java.lang.Integer" resultType="kDTO">
+		SELECT LINK_KEY,LINK_URL,LINK_ICON,LINK_ORDER FROM HYPER_LINK WHERE
+		USER_SEQ=#{user_seq} ORDER BY LINK_ORDER
+	</select>
+
+	<!-- 단축키 수정 -->
+	<update id="updateKey" parameterType="kDTO">
+		UPDATE HYPER_LINK SET LINK_URL=#{link_url}, LINK_ICON=#{link_icon} WHERE USER_SEQ=#{user_seq} AND
+		LINK_KEY=#{link_key}
+	</update>
+
+	<!-- 디데이 생성 -->
+	<insert id="insertDay" parameterType="dDTO">
+		INSERT INTO HYPER_DAY(USER_SEQ,DAY_TITLE,DAY_DATE) VALUES(#{user_seq},#{day_title},#{day_date})
+	</insert>
+
+	<!-- 디데이 조회 -->
+	<select id="selectDay" parameterType="java.lang.Integer" resultType="dDTO">
+		SELECT DAY_SEQ, DAY_TITLE,DAY_DATE FROM HYPER_DAY WHERE USER_SEQ=#{user_seq} ORDER BY
+		DAY_DATE
+	</select>
+
+	<!-- 디데이 수정 -->
+	<update id="updateDay" parameterType="dDTO">
+		UPDATE HYPER_DAY SET DAY_TITLE=#{day_title},DAY_DATE=#{day_date} WHERE DAY_SEQ=#{day_seq}
+	</update>
+
+	<!-- 디데이 삭제 -->
+	<delete id="deleteDay" parameterType="java.lang.Integer">
+		DELETE FROM HYPER_DAY WHERE DAY_SEQ=#{day_seq}
+	</delete>
+
+	<!-- 메모 조회 -->
+	<select id="getMemo" parameterType="java.lang.Integer" resultType="mDTO">
+		SELECT MEMO_SEQ,MEMO_CON FROM HYPER_MEMO WHERE USER_SEQ=#{user_seq}
+	</select>
+	
+	<!-- 메모 작성 -->
+	<insert id="setMemo" parameterType="mDTO">
+		INSERT INTO HYPER_MEMO(USER_SEQ,MEMO_CON) VALUES(#{user_seq},#{memo_con})
+	</insert>
+	
+	<!-- 메모 삭제 -->
+	<update id="removeMemo" parameterType="java.lang.Integer">
+		DELETE FROM HYPER_MEMO WHERE MEMO_SEQ=#{memo_seq}
+	</update>
+
+</mapper>
