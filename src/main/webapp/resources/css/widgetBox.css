@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+.widget {
+	position: fixed;
+	width: 350px;
+	height: 50px;
+	color: var(--main-color);
+	font-family: 'Nanum Gothic';
+	opacity: 0.8;
+	z-index: 50;
+}
+
+#widgetDate {
+	left: 30px;
+	top: 30px;
+	text-align: left;
+	vertical-align: top;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+#widgetDateBox>span {
+	font-weight: bold;
+	margin-left: 8px;
+}
+
+#widgetKey {
+	right: 30px;
+	top: 30px;
+	text-align: right;
+	vertical-align: top;
+}
+#key-ctrl-name{
+	padding-left:2px;
+	font-weight: bold;
+}
+#widgetKey>div {
+	position: relative;
+	width: 80px;
+	height: 40px;
+	display: inline-block;
+	border-radius: 4px;
+	font-size: 10px;
+	border: 1px solid var(--main-color);
+	margin-left: 5px;
+	color: var(--main-color);
+}
+
+.key-name {
+	position: absolute;
+	left: 4px;
+	top: 4px;
+}
+
+.key-explain {
+	position: absolute;
+	right: 4px;
+	bottom: 4px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#widgetFunction {
+	height: 20px;
+	right: 30px;
+	bottom: 30px;
+	text-align: right;
+	vertical-align: bottom;
+	font-size: 20px;
+}
+
+#widgetFunction>div {
+	display: inline-block;
+	margin-left: 40px;
+}
+
+#widgetProfile {
+	width: 400px;
+	height: 40px;
+	left: 30px;
+	bottom: 30px;
+	vertical-align: bottom;
+	font-size: 10px;
+	line-height: 20px;
+}
+
+#widgetProfile>div:first-child {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+a:link {
+	color: var(--main-color);
+	text-decoration: none;
+}
+
+a:visited {
+	color: var(--main-color);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--main-color);
+	text-decoration: underline;
+}

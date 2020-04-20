@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.min.app.model.file">
+
+	<!-- 이미지 업로드 -->
+	<insert id="imageIn" parameterType="java.lang.String">
+	INSERT INTO HYPER_IMAGE(USER_SEQ,ORI_IMAGE_NAME,STO_IMAGE_NAME,IMAGE_SIZE) 
+	VALUES ((SELECT USER_SEQ FROM HYPER_USER WHERE USER_EMAIL = #{user_email}),
+	'default','default',10000)
+	</insert>
+	<!-- 수정하기 -->
+	<update id="imageUp" parameterType="fDTO">
+	UPDATE HYPER_IMAGE SET ORI_IMAGE_NAME=#{ori_image_name},STO_IMAGE_NAME=#{sto_image_name},IMAGE_SIZE=#{image_size} WHERE USER_SEQ=#{user_seq}
+	</update>
+	
+	<!-- 이미지 이름 가져오기 -->
+	<select id="imageSe" parameterType="java.lang.Integer" resultType="fDto">
+	SELECT STO_IMAGE_NAME FROM HYPER_IMAGE hi WHERE USER_SEQ=#{user_seq}
+	</select>
+</mapper>
